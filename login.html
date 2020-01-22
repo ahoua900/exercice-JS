@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="style1.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<style>
+/* Style all input fields */
+
+</style>
+</head>
+<body>
+
+<div class="container">
+  <form action="/cool.html">
+    <h1>Connectez vous !</h1>
+    <label for="usrname">Nom d'ulisateur <br></label>
+    <input type="text" id="usrname" name="usrname" required>
+    <br><br>
+    <label for="psw">Mot de passe <br></label>
+    <input type="password" id="psw" name="psw" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Le mot de pase doivent contenir une lettre majuscule, au moins une lettre minuscule et un chiffre  " required>
+    
+    <input type="submit" value="connexion">
+  </form>
+</div>
+
+<div id="message">
+  <h3>Le mot de passe doit contenir:</h3>
+  <p id="letter" class="invalid">une  <b>lettre minuscule</b></p>
+  <p id="capital" class="invalid">une <b>lettre majuscule</b> </p>
+  <p id="number" class="invalid">un <b> numero </b></p>
+  <p id="length" class="invalid">Minimum <b> 8 caracteres</b></p>
+</div>
+				
+<script>
+var myInput = document.getElementById("psw");
+var letter = document.getElementById("letter");
+var capital = document.getElementById("capital");
+var number = document.getElementById("number");
+var length = document.getElementById("length");
+
+
+myInput.onfocus = function() {
+  document.getElementById("message").style.display = "block";
+}
+
+
+myInput.onblur = function() {
+  document.getElementById("message").style.display = "none";
+}
+
+
+myInput.onkeyup = function() {
+  // Validatio, due la lettre minuscule
+  var lowerCaseLetters = /[a-z]/g;
+  if(myInput.value.match(lowerCaseLetters)) {  
+    letter.classList.remove("invalid");
+    letter.classList.add("valid");
+  } else {
+    letter.classList.remove("valid");
+    letter.classList.add("invalid");
+  }
+  
+  // Validation de lettre lettre majuscule
+  var upperCaseLetters = /[A-Z]/g;
+  if(myInput.value.match(upperCaseLetters)) {  
+    capital.classList.remove("invalid");
+    capital.classList.add("valid");
+  } else {
+    capital.classList.remove("valid");
+    capital.classList.add("invalid");
+  }
+
+  // Validation du numero
+  var numbers = /[0-9]/g;
+  if(myInput.value.match(numbers)) {  
+    number.classList.remove("invalid");
+    number.classList.add("valid");
+  } else {
+    number.classList.remove("valid");
+    number.classList.add("invalid");
+  }
+  
+  // Validation de la longueur
+  if(myInput.value.length >= 8) {
+    length.classList.remove("invalid");
+    length.classList.add("valid");
+  } else {
+    length.classList.remove("valid");
+    length.classList.add("invalid");
+  }
+}
+</script>
+
+</body>
+</html>
